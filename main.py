@@ -130,11 +130,11 @@ def get_longest_sorted_asc(lst):
     mx = 0
     for i in lst:
         x = x + 1
-        if x == 0:
+        if i == 0:
             mx = i
             k = 1
         else:
-            if x >= mx:
+            if i >= mx:
                 k = k + 1
                 mx = i
             else:
