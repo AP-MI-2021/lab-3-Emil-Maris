@@ -149,11 +149,11 @@ def get_longest_sorted_asc(lst):
         l_mx = k
         poz = x
         for i in range(0, len(lst)):
-            if poz - l_mx <= i <= poz:
+            if poz - l_mx + 1 <= i <= poz:
                 b.append(lst[i])
     else:
         for i in range(0, len(lst)):
-            if poz - l_mx <= i <= poz:
+            if poz - l_mx + 1 <= i <= poz:
                 b.append(lst[i])
     return b
 
