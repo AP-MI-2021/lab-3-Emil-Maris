@@ -40,6 +40,8 @@ def suma(x):
         s = s + int(x % 10)
         x = x / 10
     return s
+
+
 def get_longest_all_perfect_squares(lst):
     """
     determina cea mai lunga secventa de numere patrate perfecte
@@ -114,13 +116,57 @@ def get_longest_same_bit_counts(lst):
                 b.append(lst[i])
     return b
 
+
+def get_longest_sorted_asc(lst):
+    """
+    :param lst:  lista principala, cu toate numerele
+    :return:  returneaza alta lista, a
+    """
+    b = []
+    k = 0
+    l_mx = 0
+    poz = 0
+    x = -1
+    mx = 0
+    for i in lst:
+        x = x + 1
+        if x == 0:
+            mx = i
+            k = 1
+        else:
+            if x >= mx:
+                k = k + 1
+                mx = i
+            else:
+                if k > l_mx:
+                    l_mx = k
+                    mx = i
+                    poz = x
+                else:
+                    mx = i
+                    k = 1
+    if k > l_mx:
+        l_mx = k
+        poz = x
+        for i in range(0, len(lst)):
+            if poz - l_mx <= i <= poz:
+                b.append(lst[i])
+    else:
+        for i in range(0, len(lst)):
+            if poz - l_mx <= i <= poz:
+                b.append(lst[i])
+    return b
+
+
 def test_get_longest_all_perfect_squares():
     assert get_longest_all_perfect_squares([1, 4, 9, 16, 25, 36, 8, 4, 9, 16]) == [4, 9, 16, 25, 36]
     assert get_longest_all_perfect_squares([3, 4, 9, 16, 25, 5, 1, 7, 5, 132]) == [4, 9, 16, 25]
     assert get_longest_all_perfect_squares([1, 52, 9, 16, 25, 36, 27, 75, 879, 66]) == [9, 16, 25, 36]
 
+
 def test_get_longest_same_bit_counts():
     assert get_longest_same_bit_counts([47, 103, 59, 1, 47, 59]) == [47, 103, 59]
+
 
 def main():
     test_get_longest_all_perfect_squares()
@@ -131,6 +177,7 @@ def main():
         print("2. Determinare cea mai lungă subsecvență cu proprietatea că toate numerele sunt pătrate perfecte. ")
         print(
             "3. Determinare cea mai lungă subsecvență cu proprietatea că toate numerele au același număr de biți de 1 în reprezentarea binară. ")
+        print("4. Determina cea mai lunga secventa cu proprietatea că toate numerele sunt in sir crescator")
         print("x. Iesire")
 
         optiune = input("Dati optiunea:  ")
@@ -141,9 +188,12 @@ def main():
             print(get_longest_all_perfect_squares(a))
         elif optiune == "3":
             print(get_longest_same_bit_counts(a))
+        elif optiune == "4":
+            print(get_longest_sorted_asc(a))
         elif optiune == "x":
             return
         else:
             print("Optiune gresita! Reincercati: ")
+
 
 main()
